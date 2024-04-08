@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -9,7 +9,7 @@
     <link rel="bookmark" th:href="@{/favicon.ico}"/>
     <title>LangV</title>
     <link th:href="@{/js/dropzone/css/dropzone.css}" rel="stylesheet"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/js/ios-switch/switchery.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/js/ios-switch/switchery.css}" />
 
     <link th:href="@{/css/style.css}" rel="stylesheet">
     <link th:href="@{/css/style-responsive.css}" rel="stylesheet">
@@ -19,7 +19,7 @@
     <script th:src="@{/js/respond.min.js}"></script>
     <![endif]-->
     <style> /*v-clock 解决闪烁{{后端参数}}的问题，在id=app的div内声明v-clock即可*/
-    [v-clock] {
+    [v-clock]{
         display: none;
     }
     </style>
@@ -34,22 +34,21 @@
 
 <!-- header section start-->
 <div th:replace="common/header::top"></div>
-<div class="wrapper ">
+<div class="wrapper " >
     <div class="row ">
-        <div class="col-sm-10" style="left: 8.3%">
+        <div  class="col-sm-10" style="left: 8.3%">
             <section class="panel">
-                <div class="panel-body">
-                    <div class="media-gal2">
+                <div  class="panel-body">
+                    <div  class="media-gal2">
                         <div class="col-md-12">
                                 <span class="js-switch">
-                                    <input onchange="changeVideoStatus()" type="checkbox" id="videoStatus"
-                                           class="js-switch-blue" checked/>
+                                    <input onchange="changeVideoStatus()" type="checkbox" id="videoStatus" class="js-switch-blue" checked/>
                                     <span id="public">公开</span>
                                 </span>
-                            <div id="app" v-clock class="panel-body">
-                                <div id="post_show">
-                                    <form @click="openFile" class="dropzone">
-                                        <i class="fa fa-upload i"></i>
+                                <div id="app" v-clock class="panel-body">
+                                    <div id="post_show">
+                                    <form  @click="openFile" class="dropzone" >
+                                        <i class="fa fa-upload i" ></i>
                                         <div class="text">
                                             点击选择视频文件
                                         </div>
@@ -61,68 +60,65 @@
                                         <div class="videoName">
                                         </div>
                                     </form>
-                                    <form class="myform" >
-                                        <input style="display: none" type="file" name="videoFile" id="postVideo"
-                                               @change="getFileName($event)">
+                                    <form  class="myform" enctype="multipart/form-data"  >
+                                        <input style="display: none" type="file" name="videoFile" id="postVideo"  @change="getFileName($event)"  >
                                         <div class="form-group myform-group">
                                             <label class="col-md-2 col-sm-2 control-label mylabel">标题</label>
-                                            <div class="title form-control">
-                                                <input @input="charNumDisplay" v-model="title" maxlength="80"
-                                                       class="hiddenInput" type="text" required>
-                                                <span class="charNum">{{remain1}}/80</span>
-                                            </div>
+                                                <div  class="title form-control">
+                                                    <input  @input="charNumDisplay" v-model="title" maxlength="80" class="hiddenInput"  type="text"  required >
+                                                    <span class="charNum">{{remain1}}/80</span>
+                                                </div>
                                         </div>
                                         <div class="form-group myform-group2">
                                             <label class="col-md-2 col-sm-2 control-label mylabel">视频介绍</label>
-                                            <textarea @input="charNumDisplay" v-model="introduction" maxlength="250"
-                                                      type="text" class="form-control mytextarea" rows="8"
-                                                      placeholder="完善视频的相关信息,让更多人能找到你的视频!"></textarea>
-                                            <span class="charNum">{{remain2}}/250</span>
+                                            <textarea  @input="charNumDisplay" v-model="introduction" maxlength="250" type="text" class="form-control mytextarea" rows="8" placeholder="完善视频的相关信息,让更多人能找到你的视频!"></textarea>
+                                                    <span class="charNum">{{remain2}}/250</span>
                                         </div>
                                         <div class="mysubmit">
-                                            <a @click="post" class="btn btn-info">确认上传</a>
-                                            <a href="javascript:window.history.back();" class="btn btn-default back">返回上页</a>
+                                            <a  @click="post"  class="btn btn-info">确认上传</a>
+                                            <a  href="javascript:window.history.back();" class="btn btn-default back">返回上页</a>
                                             <a hidden id="errorNotice" href="#myModal2" data-toggle="modal"></a>
                                         </div>
                                     </form>
 
 
-                                </div>
-                                <div id="succ_show" style="display: none">
-                                    <div class="post_succ">
+
+                                    </div>
+                                    <div id="succ_show" style="display: none">
+                                        <div class="post_succ">
                                         <img class="loading" style="height: 200px" th:src="@{/images/loading.gif}">
                                         <img class="succ" style="height: 200px" th:src="@{/images/post_succ.png}">
-                                        <div class="text"> 上传中</div>
-                                        <div class="btn">
-                                            <a href="/post.html" class="btn btn-info">继续上传</a>
-                                            &nbsp&nbsp&nbsp&nbsp&nbsp
-                                            <a href="/" class="btn btn-default">返回主页</a>
+                                         <div class="text"> 上传中</div>
+                                          <div class="btn">
+                                              <a href="/post.html" class="btn btn-info">继续上传</a>
+                                              &nbsp&nbsp&nbsp&nbsp&nbsp
+                                              <a href="/" class="btn btn-default">返回主页</a>
+                                          </div>
+                                        </div>
+                                    </div>
+                                    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal2" class="modal fade">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <a aria-hidden="true" data-dismiss="modal" class="close" >×</a>
+                                                    <h4 class="modal-title">提示</h4>
+                                                </div>
+                                                <div  class="media-gal4 modal-body">
+                                                    <div id="errorMsg"></div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a type="button" class="btn btn-default" data-dismiss="modal">确定</a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
-                                     id="myModal2" class="modal fade">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <a aria-hidden="true" data-dismiss="modal" class="close">×</a>
-                                                <h4 class="modal-title">提示</h4>
-                                            </div>
-                                            <div class="media-gal4 modal-body">
-                                                <div id="errorMsg"></div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <a type="button" class="btn btn-default" data-dismiss="modal">确定</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             <hr>
                         </div>
                         <div class="col-md-10 text-right clearfix">
                         </div>
                     </div>
+
 
 
                 </div>
@@ -148,24 +144,24 @@
 <!--右边滑条样式-->
 <!--<script src="js/jquery.nicescroll.js"></script>-->
 <script th:src="@{/js/jquery.isotope.js}"></script>
-<script th:src="@{/js/ios-switch/switchery.js}"></script>
-<script th:src="@{/js/ios-switch/ios-init.js}"></script>
+<script th:src="@{/js/ios-switch/switchery.js}" ></script>
+<script th:src="@{/js/ios-switch/ios-init.js}" ></script>
 <!--common scripts for all pages-->
 <script src="../../js/scripts.js"></script>
 <script th:src="@{/js/vue.min.js}"></script>
 <script th:src="@{/js/axios.min.js}"></script>
 <script>
-    var video_status = 0;
+    var video_status=0;
     function changeVideoStatus() {
-        var videoStatus = $('#videoStatus').prop('checked')
-        if (videoStatus) {
-            video_status = 0;
-            $("#public").text('公开')
-        } else {
-            video_status = 2;
-            $("#public").text('私密')
+        var videoStatus=$('#videoStatus').prop('checked')
+         if (videoStatus){
+             video_status=0;
+             $("#public").text('公开')
+         }else {
+             video_status=2;
+             $("#public").text('私密')
 
-        }
+         }
     }
 </script>
 <script>
@@ -178,24 +174,24 @@
             remain1: 0,
             remain2: 0,
         },
-        created() {
+        created(){
         },
-        mounted() {
+        mounted(){
         },
-        methods: {
-            openFile() {
+        methods:{
+            openFile(){
                 $('#postVideo').click();
             },
-            getFileName(event) {
+            getFileName(event){
                 var videoFile = event.currentTarget.files[0];
                 $('.videoName').text(videoFile.name)
                 $('.chose').text('已选择:')
-                this.title = videoFile.name;
-                this.videoFile = videoFile;
+                this.title=videoFile.name;
+                this.videoFile=videoFile;
             },
-            charNumDisplay() {
-                this.remain2 = this.introduction.length;
-                this.remain1 = this.title.length;
+            charNumDisplay(){
+                this.remain2=this.introduction.length;
+                this.remain1=this.title.length;
             },
             post() {
                 // 进行验证 验证通过就返回 true ,否则阻止提交

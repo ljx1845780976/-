@@ -3,16 +3,15 @@ package com.videoSite.utils;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import org.bytedeco.javacv.FFmpegFrameGrabber;
 import org.bytedeco.javacv.Frame;
-import org.bytedeco.javacv.FrameGrabber;
 import org.bytedeco.javacv.FrameGrabber.Exception;
 import org.bytedeco.javacv.Java2DFrameConverter;
 import org.springframework.stereotype.Component;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.UUID;
 
 
@@ -95,7 +94,7 @@ public class FFmpegUtils {
         return formatTime;
     }
 
-    public static String grabberVideoFramer(String videoFileName,String videoPath){
+    public static String grabberVideoFramer(String videoFileName,String videoPath,String imgPath){
         //最后获取到的视频的图片的路径
         String videPicture="";
         //Frame对象
@@ -106,7 +105,7 @@ public class FFmpegUtils {
 			 /*
             获取视频文件
             */
-            FFmpegFrameGrabber fFmpegFrameGrabber = new FFmpegFrameGrabber(videoPath + "/" + videoFileName);
+            FFmpegFrameGrabber fFmpegFrameGrabber = new FFmpegFrameGrabber(videoPath + "\\" + videoFileName);
             fFmpegFrameGrabber.start();
 
             //获取视频总帧数
@@ -120,15 +119,13 @@ public class FFmpegUtils {
 				 */
                 if (frame != null && flag==5) {
                     //文件绝对路径+名字
-                    String fileName = videoPath + UUID.randomUUID().toString()+"_" + String.valueOf(flag) + ".jpg";
+                    String fileName = imgPath +"\\"+ new Date().getTime()+".png";
 
                     //文件储存对象
                     File outPut = new File(fileName);
-                    ImageIO.write(FrameToBufferedImage(frame), "jpg", outPut);
+                    ImageIO.write(FrameToBufferedImage(frame), "png", outPut);
 
-                    //视频第五帧图的路径
-                    String savedUrl =videoPath+outPut.getName();
-                    videPicture=savedUrl;
+                    videPicture=fileName;
                     break;
                 }
                 flag++;

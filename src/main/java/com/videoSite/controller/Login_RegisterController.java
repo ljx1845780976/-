@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
  **/
 @Controller
 public class Login_RegisterController {
-
+    
     private static final String regEx1 = "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
 
     @Autowired
@@ -33,6 +33,7 @@ public class Login_RegisterController {
     @RequestMapping("/userLogin")
     public String login(){
         return "login";
+
     }
 
     @PostMapping ("/save")
@@ -64,13 +65,10 @@ public class Login_RegisterController {
         return "login";
     }
 
+
     @GetMapping("/logOut")
+    @ResponseBody
     public String logOut(){
         return "login";
-    }
-
-    @GetMapping("/manager")
-    public String manager(){
-        return "manager";
     }
 }

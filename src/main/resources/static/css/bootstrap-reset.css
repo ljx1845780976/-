@@ -320,6 +320,11 @@
 }
 .mytextarea{
     resize: none;
+    max-height: 3cm;
+    min-width: 16cm;
+    position: relative;
+    /* right: 2.1cm; */
+    top: 5px;
 }
 .mytextarea:hover,
 .mytextarea:focus{

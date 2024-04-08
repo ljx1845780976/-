@@ -59,10 +59,5 @@ public class UserController {
        modelMap.addAttribute("username",username);
        return "user/videos";
    }
-   @GetMapping("/toCollection/{username}")
-   public String toCollection(@PathVariable ("username") String username, ModelMap modelMap){
-       modelMap.addAttribute("username",username);
-       return "user/collection";
-   }
-
+    
 }
