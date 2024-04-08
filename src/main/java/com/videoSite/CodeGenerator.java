@@ -17,8 +17,14 @@ import java.util.Scanner;
 // 演示例子，执行 main 方法控制台输入模块表名回车自动生成对应项目目录中
 public class
 CodeGenerator {
-      //输入数据库
-      static String database="movie";
+    //输入数据库名
+    static String database="movie";
+    //输入数据源信息
+    static String driverName="com.mysql.cj.jdbc.Driver";
+    static String username="root";
+    static String password="qq123456";
+    //输入代码根目录包名
+    static String sourcePackage="videoSite";
     /**
      * <p>
      * 读取控制台内容
@@ -57,15 +63,15 @@ CodeGenerator {
         DataSourceConfig dsc = new DataSourceConfig();
         dsc.setUrl("jdbc:mysql://localhost:3306/"+database+"?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=UTC");
         // dsc.setSchemaName("public");
-        dsc.setDriverName("com.mysql.cj.jdbc.Driver");
-        dsc.setUsername("root");
-        dsc.setPassword("qq123456");
+        dsc.setDriverName(driverName);
+        dsc.setUsername(username);
+        dsc.setPassword(password);
         mpg.setDataSource(dsc);
 
         // 包配置
         PackageConfig pc = new PackageConfig();
         pc.setModuleName(null);
-        pc.setParent("com");
+        pc.setParent("com."+sourcePackage);
         mpg.setPackageInfo(pc);
 
         // 自定义配置

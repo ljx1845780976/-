@@ -8,10 +8,8 @@
     <meta name="author" content="ThemeBucket">
     <style>
         #dplayer{
-            max-height: 800px;
-            max-width: 800px;
-            margin-left: 2.5cm;
-
+            max-width: 80%;
+            margin: auto;
         }
     </style>
     <link rel="shortcut icon" th:href="@{/favicon.ico}"/>
@@ -118,16 +116,12 @@
                                             <span class="popuptext" id="myPopup3">发布太频繁了!</span>
                                         </a>
                                     </p>
-                                    <div id="noComment" style="text-align: center"></div>
                                     <ul v-for="(comment,index) in commentList" class="activity-list">
-
-
                                         <li >
                                             <div class="avatar">
                                                 <a :href="'/user/toHome/'+(comment.commentator)"><img th:src="@{/images/photos/user3.png}" alt=""/></a>
                                             </div>
                                             <div class="activity-desk">
-
                                                 <h5><a :href="'/user/toHome/'+(comment.commentator)">{{comment.commentator}}</a> <span>发表了评论</span></h5>
                                                 <p class="text-muted" v-text="commentTimeDif[index]"> </p>
                                                 <div class="location-map">
@@ -138,8 +132,8 @@
                                             </div>
                                         </li>
                                     </ul>
-                                    <div id="pagination" style="display: none;">
-                                        <ul style="float: right" class="pagination">
+                                    <div id="pagination" style="text-align: center;">
+                                        <ul  class="pagination">
                                             <li><a @click="prePage" >«</a></li>
                                             <li><a @click="firstPage" >1</a></li>
                                             <li ><a >···</a></li>
@@ -476,10 +470,8 @@
                                     this.commentTimeDif.push(timeDif)
                                 }
                             }
-                            $('#pagination').css("display", "inline")
-                            $('#noComment').text("")
                         }else {
-                            $('#noComment').text("暂无评论，快来占楼吧！")
+                            this.totalPages=1;
                         }
                     })
                     this.upLoading = false;
