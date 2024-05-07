@@ -8,11 +8,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="ImgServer" />
+        <module name="LangV" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="ImgServer" target="11" />
-      <module name="LangV" target="11" />
+      <module name="LangV" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
