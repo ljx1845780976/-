@@ -6,13 +6,12 @@ import com.videoSite.entity.Notification;
 import com.videoSite.service.VideoService;
 import com.videoSite.utils.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
 
 
-@RestController
+@Controller
 @RequestMapping("/admin")
 public class AdminController {
 
@@ -22,6 +21,12 @@ public class AdminController {
     VideoService videoService;
     @Autowired
     MyVideoPath myVideoPath;
+
+
+    @GetMapping("/toAdmin")
+    public String toAdmin(){
+        return "admin/admin";
+    }
 
     @PostMapping("/getVideo")
     public void getVideo(@RequestBody Comment comment){
