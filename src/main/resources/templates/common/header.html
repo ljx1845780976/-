@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"  xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<!--以上:sec关键字的使用案例：https://www.cnblogs.com/bulter/p/15019727.html-->
 <head>
     <meta charset="UTF-8">
     <title>LangV</title>
@@ -102,7 +103,8 @@
                 </a>
                  <ul sec:authorize="isAuthenticated()" class="dropdown-menu dropdown-menu-usermenu pull-right">
                       <li><a :href="'/user/toHome/'+currentUsername"><i style="font-size: 20px;" class="fa fa-user"></i>  个人</a></li>
-                      <li><a href="#"><i style="font-size: 20px;" class="fa fa-cog"></i>   设置</a></li>
+                     <li sec:authorize="hasRole('ROLE_ROOT')" ><a :href="'/admin/toAdmin'"><i style="font-size: 20px;" class="fa fa-shield"></i>  管理</a></li>
+                     <li><a href="#"><i style="font-size: 20px;" class="fa fa-cog"></i>   设置</a></li>
                       <li><a th:href="@{/logout}"><i style="font-size: 20px;" class="fa fa-sign-out"></i> 注销</a></li>
                  </ul>
                  <ul sec:authorize="!isAuthenticated()" class="dropdown-menu dropdown-menu-usermenu pull-right">

@@ -1,10 +1,244 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="ThemeBucket">
+    <link rel="shortcut icon" th:href="@{/favicon.ico}"/>
+    <link rel="bookmark" th:href="@{/favicon.ico}"/>
+    <title>LangV</title>
+
+    <link href="http://localhost:8080/css/ui-element.css" rel="stylesheet">
+    <link href="http://localhost:8080/css/style.css" rel="stylesheet">
+    <link href="http://localhost:8080/css/style-responsive.css" rel="stylesheet">
+    <script th:src="@{/js/html5shiv.js}"></script>
+    <script th:src="@{/js/respond.min.js}"></script>
+    <![endif]-->
+    <style> /*v-clock 解决闪烁{{后端参数}}的问题，在id=app的div内声明v-clock即可*/
+    [v-clock]{
+        display: none;
+    }
+    </style>
 </head>
-<body>
+
+<body class="mybody">
+
+<!-- left side start-->
+<!-- left side end-->
+
+<!-- main content start-->
+
+<!-- header section start-->
+<div th:replace="common/header::top"></div>
+<!-- header section end-->
+
+<!-- page heading start-->
+<!-- page heading end-->
+
+<!--body wrapper start-->
+<div class="wrapper " >
+    <div class="row ">
+        <div id="app" v-clock class="col-sm-10" style="left: 8.3%">
+            <div style="margin-top: 80px">
+                <section class="panel">
+                    <div class="panel-body">
+                        <div style="margin-top: -30px">
+                            <div  class="media-gal2">
+                                <div class="col-md-12">
+                                    <section class="panel">
+                                        <div style="margin-top: -60px">
+                                            <div class="panel-body">
+                                                <div class="wrapper">
+                                                    <template>
+                                                        <div style="width: 50%">
+                                                            <el-input
+                                                                    @change="getVideo()"
+                                                                    placeholder="关键字搜索"
+                                                                    v-model="keyword">
+                                                            </el-input>
+                                                        </div>
+
+                                                        <el-table
+                                                                :data="videos"
+                                                                height="550"
+                                                                stripe
+                                                                style="width: 100%">
+                                                            <el-table-column
+                                                                    label="标题"
+                                                                    prop="title"
+                                                                    >
+                                                                <template slot-scope="scope">
+                                                                    <a style="color: #00a1d6" :href="'/video/toVideo/'+(scope.row.id)"  >
+                                                                    <span style="margin-left: 10px">{{ scope.row.title }}</span>
+                                                                    </a>
+                                                                </template>
+                                                            </el-table-column>
+                                                            <el-table-column
+                                                                    label="简介"
+                                                                    prop="introduction"
+                                                                    >
+                                                                <template slot-scope="scope">
+                                                                    <span style="margin-left: 10px">{{ scope.row.introduction }}</span>
+                                                                </template>
+                                                            </el-table-column>
+                                                            <el-table-column
+                                                                    label="时长"
+                                                                    prop="time"
+                                                                    sortable
+                                                                    width="120">
+                                                                <template slot-scope="scope">
+                                                                    <span style="margin-left: 10px">{{ scope.row.time }}</span>
+                                                                </template>
+                                                            </el-table-column>
+                                                            <el-table-column
+                                                                    label="作者"
+                                                                    prop="username"
+                                                                    :filters="userFilters"
+                                                                    :filter-method="filterHandler"
+                                                                    width="120">
+                                                                <template slot-scope="scope">
+                                                                    <div slot="reference" class="name-wrapper">
+                                                                       {{ scope.row.username }}
+                                                                    </div>
+                                                                </template>
+                                                            </el-table-column>
+                                                            <el-table-column
+                                                                    label="状态"
+                                                                    prop="status"
+                                                                    :filters="statusFilters"
+                                                                    :filter-method="filterHandler"
+                                                                    width="120">
+                                                                <template slot-scope="scope">
+                                                                    <div slot="reference" class="name-wrapper">
+                                                                        <el-tag type="info" v-if="scope.row.status==2">私密</el-tag>
+                                                                        <el-tag type="success" v-else>公开</el-tag>
+                                                                    </div>
+                                                                </template>
+                                                            </el-table-column>
+                                                            <el-table-column
+                                                                    label="封面"
+                                                                    prop="img"
+                                                                    width="150"
+                                                                    >
+                                                                <template slot-scope="scope">
+                                                                    <el-image
+                                                                            style="width: 100px; height: 100px"
+                                                                            :src="'/video/getImg/'+(scope.row.id)"
+                                                                            :fit="'contain'"></el-image>
+                                                                </template>
+                                                            </el-table-column>
+                                                            <el-table-column width="100" label="操作">
+                                                                <template slot-scope="scope">
+                                                                    <!--                    <el-button-->
+                                                                    <!--                            size="mini"-->
+                                                                    <!--                            @click="handleEdit(scope.$index, scope.row)">编辑-->
+                                                                    <!--                    </el-button>-->
+                                                                    <el-button
+                                                                            size="mini"
+                                                                            type="danger"
+                                                                            @click="handleDelete(scope.$index, scope.row)">删除
+                                                                    </el-button>
+                                                                </template>
+                                                            </el-table-column>
+                                                        </el-table>
+                                                    </template>
+
+                                                </div>
+                                                <!-- Modal -->
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <div class="col-md-10 text-right clearfix">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--body wrapper end-->
+<!--footer section start-->
+<!--footer section end-->
+<div th:replace="common/header::footer"></div>
+
+
+<!-- m  ain content end-->
+
+<!-- Placed js at the end of the document so the pages load faster -->
+<!-- import Vue before Element -->
+<script src="http://localhost:8080/js/vue2.js"></script>
+<script src="http://localhost:8080/js/ui_element.js"></script>
+<script src="http://localhost:8080/js/jquery-1.10.2.min.js"></script>
+<script src="http://localhost:8080/js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="http://localhost:8080/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="http://localhost:8080/js/bootstrap.min.js"></script>
+<script src="http://localhost:8080/js/modernizr.min.js"></script>
+<script src="http://localhost:8080/js/jquery.isotope.js"></script>
+<script src="http://localhost:8080/js/axios.min.js"></script>
+<script src="http://localhost:8080/js/scripts.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            videos: [],
+            times: [],
+            keyword:"",
+            userFilters:[],
+        },
+        created(){
+            moment.locale('zh-cn')
+        },
+        mounted(){
+            this.getVideo();
+        },
+        methods:{
+            getVideo(){
+                axios.get('/admin/getVideo?keyword='+this.keyword).then(res=>{
+                    this.videos=res.data;
+                    this.userFilters=Array.from(new Set(this.videos.map(r=>r.username))).map(n=>{return {"text":n,"value":n}});
+                    this.statusFilters=Array.from(new Set(this.videos.map(r=>r.status))).map(n=>{return {"text":n===2?"私密":"公开","value":n}});
+                })
+            },
+            deleteVideo(id){
+                axios.get('/admin/deleteVideo?id='+id).then(res=>{
+                    if (res.data){
+                        this.getVideo();
+                        this.$message({
+                            type: 'success',
+                            message: '删除成功!'
+                        });
+                    }
+                })
+            },
+            handleDelete(index, row) {
+                this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning',
+                    center: true
+                }).then(() => {
+                    this.deleteVideo(row.id);
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除'
+                    });
+                });
+            },
+            filterHandler(value, row, column) {
+                const property = column['property'];
+                return row[property] === value;
+            }
+        }
+    })
+
+</script>
 
 </body>
 </html>
