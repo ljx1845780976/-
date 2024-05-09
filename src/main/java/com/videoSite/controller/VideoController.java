@@ -50,6 +50,14 @@ public class VideoController {
         modelMap.addAttribute("videoId", videoId);
         return "video/video";
     }
+    @GetMapping("/getKeyVideos/{pageNum}/{title}")
+    @ResponseBody
+    public IPage<Video> getKeyVideos(@PathVariable(value = "pageNum",required = false) Integer pageNum,
+                                     @PathVariable(value = "title") String title){
+        Page<Video> videoPage=new Page<>(pageNum,6);
+        IPage<Video> page = videoService.page(videoPage, new QueryWrapper<Video>().ne("status",2).like("title",title).orderByDesc("id"));
+        return page;
+    }
 
     @GetMapping("/getVideo/{videoId}")
     @ResponseBody

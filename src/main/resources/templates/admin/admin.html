@@ -9,9 +9,9 @@
     <link rel="bookmark" th:href="@{/favicon.ico}"/>
     <title>LangV</title>
 
-    <link href="http://localhost:8080/css/ui-element.css" rel="stylesheet">
-    <link href="http://localhost:8080/css/style.css" rel="stylesheet">
-    <link href="http://localhost:8080/css/style-responsive.css" rel="stylesheet">
+    <link href="/css/ui-element.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/style-responsive.css" rel="stylesheet">
     <script th:src="@{/js/html5shiv.js}"></script>
     <script th:src="@{/js/respond.min.js}"></script>
     <![endif]-->
@@ -67,17 +67,17 @@
                                                             <el-table-column
                                                                     label="标题"
                                                                     prop="title"
-                                                                    >
+                                                            >
                                                                 <template slot-scope="scope">
                                                                     <a style="color: #00a1d6" :href="'/video/toVideo/'+(scope.row.id)"  >
-                                                                    <span style="margin-left: 10px">{{ scope.row.title }}</span>
+                                                                        <span style="margin-left: 10px">{{ scope.row.title }}</span>
                                                                     </a>
                                                                 </template>
                                                             </el-table-column>
                                                             <el-table-column
                                                                     label="简介"
                                                                     prop="introduction"
-                                                                    >
+                                                            >
                                                                 <template slot-scope="scope">
                                                                     <span style="margin-left: 10px">{{ scope.row.introduction }}</span>
                                                                 </template>
@@ -99,7 +99,7 @@
                                                                     width="120">
                                                                 <template slot-scope="scope">
                                                                     <div slot="reference" class="name-wrapper">
-                                                                       {{ scope.row.username }}
+                                                                        {{ scope.row.username }}
                                                                     </div>
                                                                 </template>
                                                             </el-table-column>
@@ -120,7 +120,7 @@
                                                                     label="封面"
                                                                     prop="img"
                                                                     width="150"
-                                                                    >
+                                                            >
                                                                 <template slot-scope="scope">
                                                                     <el-image
                                                                             style="width: 100px; height: 100px"
@@ -172,16 +172,16 @@
 
 <!-- Placed js at the end of the document so the pages load faster -->
 <!-- import Vue before Element -->
-<script src="http://localhost:8080/js/vue2.js"></script>
-<script src="http://localhost:8080/js/ui_element.js"></script>
-<script src="http://localhost:8080/js/jquery-1.10.2.min.js"></script>
-<script src="http://localhost:8080/js/jquery-ui-1.9.2.custom.min.js"></script>
-<script src="http://localhost:8080/js/jquery-migrate-1.2.1.min.js"></script>
-<script src="http://localhost:8080/js/bootstrap.min.js"></script>
-<script src="http://localhost:8080/js/modernizr.min.js"></script>
-<script src="http://localhost:8080/js/jquery.isotope.js"></script>
-<script src="http://localhost:8080/js/axios.min.js"></script>
-<script src="http://localhost:8080/js/scripts.js"></script>
+<script src="/js/vue2.js"></script>
+<script src="/js/ui_element.js"></script>
+<script src="/js/jquery-1.10.2.min.js"></script>
+<script src="/js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/modernizr.min.js"></script>
+<script src="/js/jquery.isotope.js"></script>
+<script src="/js/axios.min.js"></script>
+<script src="/js/scripts.js"></script>
 <script>
     new Vue({
         el: '#app',
