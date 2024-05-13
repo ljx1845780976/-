@@ -29,3 +29,6 @@
 
 **7、上传页面**
 ![image](https://github.com/ljx1845780976/img/blob/main/%E4%B8%8A%E4%BC%A0%E9%A1%B5%E9%9D%A2.png)
+
+**8、管理员页面**
+![image](https://gitee.com/ljx1845780976/img/raw/main/%E7%AE%A1%E7%90%86%E5%91%98%E9%A1%B5%E9%9D%A2.png)
